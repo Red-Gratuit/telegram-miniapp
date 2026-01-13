@@ -41,6 +41,10 @@ video{
   width:100%;
   border-radius:15px;
 }
+img{
+  width:100%;
+  border-radius:15px;
+}
 
     </style>
 </head>
@@ -79,7 +83,11 @@ function load(cat){
   .then(items => {
     document.getElementById("list").innerHTML = items.map(p=>`
       <div class="card">
-        <video src="${p.video}" autoplay loop muted></video>
+        ${p.video ? `
+        <video src="${p.video}" playsinline autoplay muted loop></video>
+        ` : `
+        <img src="${p.image}" />
+        `}
         <h4>${p.name}</h4>
         <p>${p.price}</p>
         <button>Commander</button>
