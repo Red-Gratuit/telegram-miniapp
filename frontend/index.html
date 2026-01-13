@@ -1,60 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Cali Fast Drive</title>
+<meta charset="UTF-8">
+<title>Cali Fast Drive</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <!-- Telegram Mini App SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body {
+    background:#111;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
+}
 
-    <style>
-        body {
-            background: #111;
-            color: white;
-            font-family: Arial;
-            text-align: center;
-            padding-top: 50px;
-        }
-        button {
-            background: #00ff9d;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .menu button {
-  margin:5px;
-  padding:15px;
-  border-radius:12px;
-  background:#00ff9d;
-  border:none;
-  font-size:16px;
+/* SPLASH SCREEN */
+#splash{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+#splash img{
+    width:70%;
+    max-width:320px;
+    margin-bottom:30px;
+    animation: logoIn 1.5s ease;
+}
+@keyframes logoIn{
+    from{ transform:scale(0.3); opacity:0; }
+    to{ transform:scale(1); opacity:1; }
+}
+
+#enterBtn{
+    background:#00ff9d;
+    color:#000;
+    border:none;
+    padding:18px 30px;
+    font-size:18px;
+    border-radius:15px;
+    font-weight:bold;
+}
+
+#muteBtn{
+    margin-top:15px;
+    background:#222;
+    color:#fff;
+    border:1px solid #00ff9d;
+    padding:8px 18px;
+    border-radius:12px;
+}
+
+/* SHOP */
+.menu button{
+    margin:5px;
+    padding:15px;
+    border-radius:12px;
+    background:#00ff9d;
+    border:none;
+    font-size:16px;
 }
 .card{
-  background:#222;
-  margin:15px;
-  border-radius:15px;
-  padding:10px;
+    background:#222;
+    margin:15px;
+    border-radius:15px;
+    padding:10px;
 }
-video{
-  width:100%;
-  border-radius:15px;
+video, img{
+    width:100%;
+    border-radius:15px;
 }
-img{
-  width:100%;
-  border-radius:15px;
+button{
+    background:#00ff9d;
+    border:none;
+    padding:12px 25px;
+    font-size:16px;
+    border-radius:12px;
 }
-
-    </style>
+</style>
 </head>
 
 <body>
-<h1>🚗 Cali Fast Drive</h1>
-<div id="app"></div>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- SPLASH -->
+<div id="splash">
+    <img src="assets/logo.jpg">
+    <button id="enterBtn">Entrer dans le shop</button>
+    <button id="muteBtn">🔊 Son ON</button>
+    <audio id="introSound" src="assets/intro.mp3" loop></audio>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" style="display:none;">
+    <h1>🚗 Cali Fast Drive</h1>
+    <div id="app"></div>
+</div>
+
 <script>
+const enterBtn = document.getElementById("enterBtn");
+const muteBtn = document.getElementById("muteBtn");
+const splash = document.getElementById("splash");
+const mainApp = document.getElementById("mainApp");
+const sound = document.getElementById("introSound");
+
+let muted = false;
+
+muteBtn.onclick = ()=>{
+    muted = !muted;
+    sound.muted = muted;
+    muteBtn.textContent = muted ? "🔇 Son OFF" : "🔊 Son ON";
+};
+
+enterBtn.onclick = async ()=>{
+    try { await sound.play(); } catch(e){}
+    splash.style.display="none";
+    mainApp.style.display="block";
+};
+
 const tg = Telegram.WebApp;
 tg.expand();
 const API = "https://telegram-miniapp-production-3c87.up.railway.app";
@@ -74,20 +140,16 @@ fetch(API + "/init", {
       <button onclick="load('tabac')">🚬 TABAC</button>
     </div>
     <div id="list"></div>
-  `
+  `;
 });
 
 function load(cat){
   fetch(API + "/products/" + cat)
   .then(r=>r.json())
-  .then(items => {
+  .then(items=>{
     document.getElementById("list").innerHTML = items.map(p=>`
       <div class="card">
-        ${p.video ? `
-        <video src="${p.video}" playsinline autoplay muted loop></video>
-        ` : `
-        <img src="${p.image}" />
-        `}
+        ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : `<img src="${p.image}">`}
         <h4>${p.name}</h4>
         <p>${p.price}</p>
         <button>Commander</button>
@@ -96,5 +158,6 @@ function load(cat){
   });
 }
 </script>
+
 </body>
 </html>
