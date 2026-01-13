@@ -195,7 +195,7 @@ function openProduct(p){
     ${p.video ? `<video src="${p.video}" autoplay playsinline loop controls></video>` : ""}
     ${p.image ? `<img src="${p.image}">` : ""}
     <h2>${p.name || p.title}</h2>
-    <p>${p.text || ""}</p>
+   <p>${p.desc || ""}</p>
   `;
 }
 
