@@ -27,30 +27,34 @@
 </head>
 
 <body>
-
 <h1>🚗 Cali Fast Drive</h1>
-<p>Mini App Telegram connectée</p>
+<div id="app"></div>
 
-<button id="connect">Se connecter</button>
-
-<pre id="result"></pre>
-
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-const tg = window.Telegram.WebApp;
-tg.expand();   // ouvre la mini app en plein écran
+const tg = Telegram.WebApp;
+tg.expand();
 
-document.getElementById("connect").onclick = () => {
-    fetch("http://127.0.0.1:8000/init", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(tg.initDataUnsafe)
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
-    });
+const API = "https://telegram-miniapp-production-3c87.up.railway.app";
+
+fetch(API + "/init", {
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body: JSON.stringify(tg.initDataUnsafe)
+})
+.then(r=>r.json())
+.then(user => {
+    document.getElementById("app").innerHTML = `
+        <h3>Bienvenue ${user.received.user.first_name}</h3>
+        <button onclick="openCat('stup')">🔥 STUP</button>
+        <button onclick="openCat('puff')">💨 PUFF</button>
+        <button onclick="openCat('weed')">🌿 WEED</button>
+    `
+});
+
+function openCat(cat){
+  alert("Tu as ouvert " + cat);
 }
 </script>
-
 </body>
 </html>
