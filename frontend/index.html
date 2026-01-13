@@ -224,8 +224,8 @@ function load(cat){
         ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : 
          p.image ? `<img src="${p.image}">` :
          `<div style="padding:20px">
-           <h3>${p.name}</h3>
-            <p style="color:#ccc;font-size:14px;line-height:1.4">${p.desc || ""}</p>
+           <h3>${p.name || p.title || ""}</h3>
+           <p style="color:#ccc;font-size:14px;line-height:1.4">${p.desc || p.text || ""}</p>
           </div>`}
         ${p.name ? `<h4>${p.name}</h4>` : ``}
       </div>
