@@ -180,7 +180,7 @@ function load(cat){
          p.image ? `<img src="${p.image}">` :
          `<div style="padding:20px">
             <h3>${p.title}</h3>
-            <p>${p.text}</p>
+            <p>${p.desc || ""}</p>
           </div>`}
         ${p.name ? `<h4>${p.name}</h4>` : ``}
       </div>
