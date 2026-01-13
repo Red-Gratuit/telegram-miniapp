@@ -44,14 +44,14 @@ products = {
             "video": "https://cdn.pixabay.com/video/2023/03/10/154331-807109997_large.mp4"
         }
     ],
-    "weed": [
-        {
-            "id": 4,
-            "name": "WEED GOLD",
-            "price": "25€",
-            "video": "https://cdn.pixabay.com/video/2023/07/24/173568-847726095_large.mp4"
-        }
-    ]
+    "tabac": [
+    {
+        "id": 4,
+        "name": "TABAC GOLD",
+        "price": "12€",
+        "video": "https://cdn.pixabay.com/video/2023/07/24/173568-847726095_large.mp4"
+    }
+]
 }
 
 @app.get("/products/{cat}")
