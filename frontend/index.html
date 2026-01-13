@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cali Fast Drive</title>
+
+    <!-- Telegram Mini App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 50px;
+        }
+        button {
+            background: #00ff9d;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🚗 Cali Fast Drive</h1>
+<p>Mini App Telegram connectée</p>
+
+<button id="connect">Se connecter</button>
+
+<pre id="result"></pre>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();   // ouvre la mini app en plein écran
+
+document.getElementById("connect").onclick = () => {
+    fetch("http://127.0.0.1:8000/init", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tg.initDataUnsafe)
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+    });
+}
+</script>
+
+</body>
+</html>
