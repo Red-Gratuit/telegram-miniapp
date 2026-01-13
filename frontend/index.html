@@ -23,6 +23,25 @@
             border-radius: 10px;
             cursor: pointer;
         }
+        .menu button {
+  margin:5px;
+  padding:15px;
+  border-radius:12px;
+  background:#00ff9d;
+  border:none;
+  font-size:16px;
+}
+.card{
+  background:#222;
+  margin:15px;
+  border-radius:15px;
+  padding:10px;
+}
+video{
+  width:100%;
+  border-radius:15px;
+}
+
     </style>
 </head>
 
@@ -34,7 +53,6 @@
 <script>
 const tg = Telegram.WebApp;
 tg.expand();
-
 const API = "https://telegram-miniapp-production-3c87.up.railway.app";
 
 fetch(API + "/init", {
@@ -44,16 +62,30 @@ fetch(API + "/init", {
 })
 .then(r=>r.json())
 .then(user => {
-    document.getElementById("app").innerHTML = `
-        <h3>Bienvenue ${user.received.user.first_name}</h3>
-        <button onclick="openCat('stup')">🔥 STUP</button>
-        <button onclick="openCat('puff')">💨 PUFF</button>
-        <button onclick="openCat('weed')">🌿 WEED</button>
-    `
+  document.getElementById("app").innerHTML = `
+    <h3>Bienvenue ${user.received.user.first_name}</h3>
+    <div class="menu">
+      <button onclick="load('stup')">🔥 STUP</button>
+      <button onclick="load('puff')">💨 PUFF</button>
+      <button onclick="load('weed')">🌿 WEED</button>
+    </div>
+    <div id="list"></div>
+  `
 });
 
-function openCat(cat){
-  alert("Tu as ouvert " + cat);
+function load(cat){
+  fetch(API + "/products/" + cat)
+  .then(r=>r.json())
+  .then(items => {
+    document.getElementById("list").innerHTML = items.map(p=>`
+      <div class="card">
+        <video src="${p.video}" autoplay loop muted></video>
+        <h4>${p.name}</h4>
+        <p>${p.price}</p>
+        <button>Commander</button>
+      </div>
+    `).join("");
+  });
 }
 </script>
 </body>
