@@ -41,32 +41,57 @@ products = {
     ],
 
     "stup": [
-        {"id":1,"name":"STUP 1","video":"https://cdn.pixabay.com/video/2023/09/03/178307-861779302_large.mp4"},
-        {"id":2,"name":"STUP 2","video":"https://cdn.pixabay.com/video/2023/08/31/177876-860787987_large.mp4"},
-        {"id":3,"name":"STUP 3","video":"https://cdn.pixabay.com/video/2023/03/10/154331-807109997_large.mp4"},
-        {"id":4,"name":"STUP 4","video":"https://cdn.pixabay.com/video/2023/07/24/173568-847726095_large.mp4"},
-        {"id":5,"name":"STUP 5","video":"https://cdn.pixabay.com/video/2023/02/20/150621-800567532_large.mp4"},
-        {"id":6,"name":"STUP 6","video":"https://cdn.pixabay.com/video/2023/03/28/156841-812831195_large.mp4"},
-        {"id":7,"name":"STUP 7","video":"https://cdn.pixabay.com/video/2023/04/10/160789-820949911_large.mp4"},
-        {"id":8,"name":"STUP 8","video":"https://cdn.pixabay.com/video/2023/05/10/164209-828336023_large.mp4"},
-        {"id":9,"name":"STUP 9","video":"https://cdn.pixabay.com/video/2023/06/15/169852-842736441_large.mp4"},
-        {"id":10,"name":"STUP 10","video":"https://cdn.pixabay.com/video/2023/07/01/172543-846287764_large.mp4"},
-        {"id":11,"name":"STUP 11","video":"https://cdn.pixabay.com/video/2023/08/05/175432-853281554_large.mp4"},
-        {"id":12,"name":"STUP 12","video":"https://cdn.pixabay.com/video/2023/08/20/176543-857291143_large.mp4"},
-        {"id":13,"name":"STUP 13","video":"https://cdn.pixabay.com/video/2023/09/01/178001-860901233_large.mp4"}
-    ],
+  {"id":1,"name":"STUP 1","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup1.mp4"},
+  {"id":2,"name":"STUP 2","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup2.mp4"},
+  {"id":3,"name":"STUP 3","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup3.mp4"},
+  {"id":4,"name":"STUP 4","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup4.mp4"},
+  {"id":5,"name":"STUP 5","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup5.mp4"},
+  {"id":6,"name":"STUP 6","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup6.mp4"},
+  {"id":7,"name":"STUP 7","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup7.mp4"},
+  {"id":9,"name":"STUP 9","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup9.mp4"},
+  {"id":10,"name":"STUP 10","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup10.mp4"},
+  {"id":11,"name":"STUP 11","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup11.mp4"},
+  {"id":12,"name":"STUP 12","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup12.mp4"},
+  {"id":13,"name":"STUP 13","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup13.mp4"},
+  {"id":14,"name":"STUP 14","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup14.mp4"},
+  {"id":17,"name":"STUP 17","video":"https://telegram-miniapp-581.pages.dev/assets/media/stup/stup17.mp4"}
+],
 
-    "puff": [
-        {"id":20,"name":"PUFF BLUE","image":"https://picsum.photos/400/600?1"},
-        {"id":21,"name":"PUFF RED","image":"https://picsum.photos/400/600?2"},
-        {"id":22,"name":"PUFF GREEN","image":"https://picsum.photos/400/600?3"},
-        {"id":23,"name":"PUFF GOLD","image":"https://picsum.photos/400/600?4"},
-        {"id":24,"name":"PUFF BLACK","image":"https://picsum.photos/400/600?5"}
-    ],
+"puff": [
+  {
+    "id": 20,
+    "name": "PUFF 1",
+    "image": "https://telegram-miniapp-581.pages.dev/assets/media/puff/puff1.jpg"
+  },
+  {
+    "id": 21,
+    "name": "PUFF 2",
+    "image": "https://telegram-miniapp-581.pages.dev/assets/media/puff/puff2.jpg"
+  },
+  {
+    "id": 22,
+    "name": "PUFF 3",
+    "image": "https://telegram-miniapp-581.pages.dev/assets/media/puff/puff3.jpg"
+  },
+  {
+    "id": 23,
+    "name": "PUFF 4",
+    "image": "https://telegram-miniapp-581.pages.dev/assets/media/puff/puff4.jpg"
+  },
+  {
+    "id": 24,
+    "name": "PUFF 5",
+    "image": "https://telegram-miniapp-581.pages.dev/assets/media/puff/puff5.jpg"
+  }
+]
 
-    "tabac": [
-        {"id":30,"name":"TABAC PREMIUM","video":"https://cdn.pixabay.com/video/2023/07/24/173568-847726095_large.mp4"}
-    ]
+  "tabac": [
+  {
+    "id": 30,
+    "name": "TABAC",
+    "video": "https://telegram-miniapp-581.pages.dev/assets/media/tabac/tabac1.mp4"
+  }
+]
 }
 
 @app.get("/products/{cat}")
