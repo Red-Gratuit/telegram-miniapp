@@ -22,6 +22,23 @@ def init(data: dict):
         "message": "Connected to Telegram Mini App"
     }
 products = {
+    "info": [
+    {
+        "id": 99,
+        "title": "📦 Livraison",
+        "text": "Livraison rapide dans toute la ville. 30–60 minutes selon zone."
+    },
+    {
+        "id": 100,
+        "title": "🕒 Horaires",
+        "text": "Ouvert tous les jours de 18h à 04h."
+    },
+    {
+        "id": 101,
+        "title": "📲 Contact",
+        "text": "Contactez-nous directement sur Telegram : @xr_shop_test_bot"
+    }
+]
     "stup": [
         {"id":1,"name":"STUP 1","price":"15€","video":"https://cdn.pixabay.com/video/2023/09/03/178307-861779302_large.mp4"},
         {"id":2,"name":"STUP 2","price":"15€","video":"https://cdn.pixabay.com/video/2023/08/31/177876-860787987_large.mp4"},
