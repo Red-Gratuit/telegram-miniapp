@@ -52,9 +52,21 @@ products = {
     ],
 
     "info": [
-        {"title": "Livraison", "text": "Livraison rapide 7j/7"},
-        {"title": "Support", "text": "Contact via Telegram"},
-        {"title": "Paiement", "text": "Paiement sécurisé"}
+        {
+            "id": 100,
+            "title": "📦 Livraison",
+            "text": "Livraison rapide en moins de 30 minutes selon votre zone."
+        },
+        {
+            "id": 101,
+            "title": "🔒 Discrétion",
+            "text": "Emballage discret et paiement sécurisé."
+        },
+        {
+            "id": 102,
+            "title": "📍 Zones",
+            "text": "Nous livrons dans toute la région."
+        }
     ]
 }
 
