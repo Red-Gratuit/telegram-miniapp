@@ -311,6 +311,17 @@ button:active{
   color:black;
   font-weight:bold;
 }
+#logoBar{
+    display:flex;
+    justify-content:center;
+    margin:20px 0 10px;
+}
+
+.shop-logo{
+    width:160px;
+    max-width:70%;
+    filter: drop-shadow(0 0 12px rgba(255,215,0,0.4));
+}
 
 </style>
 </head>
@@ -327,8 +338,11 @@ button:active{
 
 <!-- MAIN APP -->
 <div id="mainApp" style="display:none;">
-    <h1>🚗 Cali Fast Drive</h1>
-    <div id="app"></div>
+  <div id="logoBar">
+    <img src="assets/logo.jpg" class="shop-logo">
+  </div>
+
+  <div id="app"></div>
 </div>
 
 <script>
@@ -383,9 +397,7 @@ fetch(API + "/init", {
 .then(r=>r.json())
 .then(user => {
 
- document.getElementById("app").innerHTML = `
-<h3>Bienvenue ${user.received.user.first_name}</h3>
-
+document.getElementById("app").innerHTML = `
 <div id="categories">
   <div class="cat-btn active" data-cat="stup">🌿 STUP</div>
   <div class="cat-btn" data-cat="tabac">🚬 TABAC</div>
@@ -394,7 +406,7 @@ fetch(API + "/init", {
 </div>
 
 <div id="list"></div>
-  `;
+`;
 
  // ACTIVER LES BOUTONS
  document.querySelectorAll(".cat-btn").forEach(btn => {
