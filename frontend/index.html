@@ -82,14 +82,22 @@ body{
 }
 
 .card{
-  background: linear-gradient(180deg, #0a0a0a, #000);
-  border-radius:18px;
-  padding:10px;
+  background: linear-gradient(145deg,#0a0a0a,#111);
+  border-radius: 18px;
+  padding: 0;
+  overflow: hidden;
   box-shadow:
-    0 0 15px rgba(212,175,55,0.15),
-    inset 0 0 20px rgba(212,175,55,0.05);
-  border:1px solid rgba(212,175,55,0.2);
-  cursor:pointer;
+    0 0 15px rgba(255,200,60,0.15),
+    0 0 40px rgba(255,180,30,0.05);
+  border: 1px solid rgba(255,200,60,0.25);
+  transition: all 0.25s ease;
+}
+
+.card:active{
+  transform: scale(0.97);
+  box-shadow:
+    0 0 30px rgba(255,200,60,0.5),
+    0 0 80px rgba(255,180,30,0.3);
 }
 
 video, img{
@@ -143,6 +151,18 @@ button {
     font-size: 22px !important;
     border-radius: 20px !important;
 }
+.card p{
+  color:#ddd;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.card h3{
+  color: #ffd36b;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255,200,60,.4);
+}
 
 /* Boutons dans les cartes */
 .card button {
@@ -164,16 +184,22 @@ button, .card {
 }
 
 button{
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  color:#000;
-  box-shadow:0 0 20px rgba(212,175,55,0.4);
+  background: linear-gradient(135deg,#1a1a1a,#000);
+  border: 1px solid #ffd36b;
+  color:#ffd36b;
+  font-size:18px;
+  padding:18px;
+  border-radius:18px;
+  width:90%;
+  margin:10px auto;
+  box-shadow:0 0 20px rgba(255,200,60,0.2);
 }
 
-button{
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  color:#000;
-  box-shadow:0 0 20px rgba(212,175,55,0.4);
+button:active{
+  background: linear-gradient(135deg,#ffd36b,#ffb800);
+  color:black;
 }
+
 
 #overlay{
   background: linear-gradient(180deg, #000, #050505);
@@ -184,6 +210,20 @@ button{
   border:1px solid rgba(212,175,55,0.3);
   box-shadow:0 0 40px rgba(212,175,55,0.3);
   border-radius:20px;
+}
+#overlay{
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.95);
+}
+
+#overlay h2{
+  color:#ffd36b;
+  text-shadow:0 0 15px rgba(255,200,60,.5);
+}
+
+#overlay p{
+  color:#ddd;
+  font-size:16px;
 }
 
 </style>
