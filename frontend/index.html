@@ -92,7 +92,13 @@ body{
   gap: 12px;
   padding: 12px;
 }
-
+#list.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 12px;
+  align-items: stretch;   /* IMPORTANT */
+}
 /* Mode INFO (fullscreen) */
 #list.info{
   display: flex !important;
@@ -100,11 +106,11 @@ body{
   align-items: center;
   padding: 0;
 }
-
-.card{
-  backdrop-filter: blur(8px);
-  background: rgba(20,20,20,.8);
+#list.info .card {
+  height: auto;
 }
+
+
 @keyframes pop{
   from{opacity:0; transform:scale(.9)}
   to{opacity:1; transform:scale(1)}
@@ -114,16 +120,19 @@ body{
   animation: pop .4s ease forwards;
 }
 
-.card{
-  background: linear-gradient(145deg,#0a0a0a,#111);
-  border-radius: 18px;
-  padding: 0;
+.card {
+  width: 100%;
+  height: 220px;
+  position: relative;
   overflow: hidden;
-  box-shadow:
-    0 0 15px rgba(255,200,60,0.15),
-    0 0 40px rgba(255,180,30,0.05);
-  border: 1px solid rgba(255,200,60,0.25);
-  transition: all 0.25s ease;
+  border-radius: 14px;
+}
+.card video,
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* 🔥 clé du rendu comme avant */
+  display: block;
 }
 .card::before{
   content:"";
