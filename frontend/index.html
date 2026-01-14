@@ -395,6 +395,18 @@ fetch(API + "/init", {
     <div id="list"></div>
   `;
   load("stup");
+  function selectCat(cat, el){
+  // Retirer le bouton actif
+  document.querySelectorAll(".cat-btn").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  // Activer celui cliqué
+  el.classList.add("active");
+
+  // Charger la catégorie
+  load(cat);
+}
 });
 
 function load(cat){
