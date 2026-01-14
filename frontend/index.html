@@ -409,7 +409,7 @@ fetch(API + "/init", {
 }
 });
 
-function load(cat){
+function load(cat) {
     fetch(API + "/products/" + cat)
     .then(r => r.json())
     .then(items => {
@@ -441,7 +441,7 @@ function load(cat){
     });
 }
 
-function openProduct(p){
+window.openProduct = function(p) {
     const overlay = document.getElementById("overlay");
     const content = document.getElementById("overlayContent");
 
@@ -487,7 +487,7 @@ function openProduct(p){
 `;
 }
 
-function closeOverlay(){
+window.closeOverlay = function() {
   document.getElementById("overlay").style.display="none";
 }
 </script>
