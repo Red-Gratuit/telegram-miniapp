@@ -21,7 +21,7 @@ def init(data: dict):
         "received": data,
         "message": "Connected to Telegram Mini App"
     }
-products = {
+products = 
     "stup": [
         {"id": 1, "name": "Purple Molt 🏴‍☠️", "video": "https://telegram-miniapp-581.pages.dev/assets/media/stup/stup1.mp4","desc":"Purple Molt 💜🔥 — saveur fruitée intense, effet relaxant et vibes ultra smooth 😮‍💨✨"},
         {"id": 2, "name": "Live Rosin 🍋", "video": "https://telegram-miniapp-581.pages.dev/assets/media/stup/stup2.mp4","desc":"extrait ultra pur, goût naturel puissant et effet premium relaxant 😮‍💨💎"},
