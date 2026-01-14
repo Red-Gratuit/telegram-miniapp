@@ -51,24 +51,28 @@ products = {
         {"id": 30, "name": "Cartouche 🚬", "video": "https://telegram-miniapp-581.pages.dev/assets/media/tabac/tabac1.mp4","desc":"Cartouche 🚬📦 — format pratique, qualité constante et style clean & premium ✨💎"}
     ],
 
-    "info": [
-        {
-            "id": 100,
-            "title": "SUR PLACE📍/ LIVRAISON RAPIDE 🚚 / ENVOIE MONDIAL RELAY 📩 / PRIX IMBATTABLE‼️",
-            "text": "Livraison Disponible dans tous les 59/62 📌"
-        },
-        {
-            "id": 101,
-            "title": "📦 Envoie Colis",
-            "text": "Pour un traitement rapide, veuillez fournir : Vérification d identité (nouveaux clients) L adresse de livraison complète Vos disponibilités pour la réception Les détails de votre commande Vérification d'identité Modes de paiement : CASH, BTC…."
-        },
-        {
-            "id": 102,
-            "title": "📍 Meet-Up",
-            "text": "Plusieurs Meet-Up à votre disposition : En privée pour + d’informations.."
-        }
-    ]
-}
+   "info": [
+    {
+        "id": 999,
+        "title": "ℹ️ Informations",
+        "text": "CaliFastDrive — Commandes sécurisées et flexibles\n\n"
+                "SUR PLACE 📍 / LIVRAISON RAPIDE 🚚 / ENVOIE MONDIAL RELAY 📩 / PRIX IMBATTABLE‼️\n\n"
+                
+                "📦 Envoie Colis\n"
+                "• Vérification d'identité\n"
+                "• Modes de paiement : CASH, BTC…\n"
+                "• Adresse de livraison complète\n"
+                "• Disponibilités pour la réception\n"
+                "• Détails de la commande\n\n"
+                
+                "📍 Meet-Up\n"
+                "Plusieurs Meet-Up à votre disposition\n"
+                "En privée pour + d’informations\n\n"
+                
+                "🚚 Livraison\n"
+                "Disponible dans tous les 59 / 62 📌"
+    }
+]
 
 @app.get("/products/{cat}")
 def get_products(cat: str):
