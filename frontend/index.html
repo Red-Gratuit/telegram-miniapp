@@ -330,14 +330,15 @@ button:active{
 /* === GOLD LUXURY GLOW === */
 .info-card {
   width: 100%;
-  max-width: 600px;
+  max-width: 650px;
   background: radial-gradient(circle at top, #111, #000);
-  border-radius: 20px;
-  padding: 30px;
+  border-radius: 22px;
+  padding: 32px;
   color: white;
   border: 1px solid rgba(255,215,0,0.6);
-  box-shadow: 0 0 40px rgba(255,215,0,0.4);
-  text-align: left;
+  box-shadow: 
+    0 0 30px rgba(255,215,0,0.35),
+    inset 0 0 20px rgba(255,215,0,0.1);
 }
 .info-card h2 {
   color: gold;
@@ -359,10 +360,10 @@ button:active{
   color: #ddd;
 }
 .info-full {
-  min-height: 70vh;
+  min-height: calc(100vh - 220px); /* 220px ≈ header + logo + catégories */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center;      /* CENTRAGE VERTICAL */
+  justify-content: center;  /* CENTRAGE HORIZONTAL */
   padding: 20px;
 }
 
