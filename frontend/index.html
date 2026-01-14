@@ -83,14 +83,27 @@ body{
     border:none;
     font-size:16px;
 }
-
-/* CARTES */
-#list{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:12px;
-    padding:10px;
+/* Zone qui contient les cartes */
+#list {
+  min-height: calc(100vh - 260px); /* espace restant sous header + catégories */
+  padding: 12px;
 }
+
+/* Mode normal (STUP / TABAC / PUFF) */
+#list.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+/* Mode INFO */
+#list.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .card{
   backdrop-filter: blur(8px);
   background: rgba(20,20,20,.8);
@@ -494,36 +507,36 @@ function load(cat) {
     .then(r => r.json())
     .then(items => {
 
-      // MODE INFO = UNE SEULE CARTE FULLSCREEN
-      if (cat === "info") {
-        const p = items[0]; // on prend le seul objet info
+  // ===== MODE INFO (UNE SEULE CARTE FULLSCREEN) =====
+  if (cat === "info") {
+    const p = items[0]; // l'unique objet info
 
-        document.getElementById("list").innerHTML = `
-          <div class="info-full">
-            <div class="info-card">
-              <h2>ℹ️ ${p.title}</h2>
-              <pre>${p.text}</pre>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      // MODE NORMAL (STUP / PUFF / TABAC)
-      document.getElementById("list").innerHTML = items.map(p => `
-        <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
-          ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : ""}
-          ${p.image ? `<img src="${p.image}">` : ""}
-          <div style="padding:20px">
-            <h3>${p.name || p.title}</h3>
-            <p style="color:#ccc;font-size:14px;line-height:1.4">
-              ${p.desc || p.text || ""}
-            </p>
-          </div>
+    document.getElementById("list").innerHTML = `
+      <div class="info-full">
+        <div class="info-card">
+          <h2>ℹ️ ${p.title}</h2>
+          <pre>${p.text}</pre>
         </div>
-      `).join("");
+      </div>
+    `;
+    return;
+  }
 
-    })
+  // ===== MODE NORMAL (STUP / PUFF / TABAC) =====
+  document.getElementById("list").innerHTML = items.map(p => `
+    <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
+      ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : ""}
+      ${p.image ? `<img src="${p.image}">` : ""}
+      <div style="padding:20px">
+        <h3>${p.name || p.title}</h3>
+        <p style="color:#ccc;font-size:14px;line-height:1.4">
+          ${p.desc || p.text || ""}
+        </p>
+      </div>
+    </div>
+  `).join("");
+})
+
     .catch(err => {
       console.error(err);
       document.getElementById("list").innerHTML = "Erreur chargement";

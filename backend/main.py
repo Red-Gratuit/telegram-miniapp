@@ -27,9 +27,9 @@ products = {
         },
         {
             "id": 3,
-            "name": "Moncler 320mg 💊",
+            "name": "Cali Exotic ICC 64 🥬",
             "video": "https://telegram-miniapp-581.pages.dev/assets/media/stup/stup3.mp4",
-            "desc": "Moncler 320 mg 💎 — intensité élevée, sensation premium et performance longue durée ✨🔥"
+            "desc": "Cali Exotic ICC 64 🥬🍦 — notes douces et crémeuses, vibes cali et sensation premium ✨💎"
         },
         {
             "id": 4,
@@ -57,9 +57,9 @@ products = {
         },
         {
             "id": 9,
-            "name": "Rolex 300mg 💎",
+            "name": "Cali Prenium Shelf Gelato 33 🥬",
             "video": "https://telegram-miniapp-581.pages.dev/assets/media/stup/stup9.mp4",
-            "desc": "Piatella 🍯 — texture fondante, finition haut de gamme et vibes ultra premium ✨"
+            "desc": "Cali Premium Shelf Gelato 33 🥬🍨 — douceur intense, qualité top shelf et vibes ultra premium ✨💎"
         },
         {
             "id": 10,
@@ -69,9 +69,9 @@ products = {
         },
         {
             "id": 11,
-            "name": "MDMA Champagne 🍾",
+            "name": "Cali US Jelly Darkness 🥬",
             "video": "https://telegram-miniapp-581.pages.dev/assets/media/stup/stup11.mp4",
-            "desc": "MDMA Champagne 🍾 — énergie pétillante, style festif et sensation luxe premium ✨🔥"
+            "desc": "Cali US Jelly Darkness 🥬🌌 — saveur profonde, vibes mystérieuses et finition ultra premium 💎🔥"
         },
         {
             "id": 12,
