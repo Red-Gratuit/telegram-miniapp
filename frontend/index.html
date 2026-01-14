@@ -410,21 +410,35 @@ fetch(API + "/init", {
 });
 
 function load(cat){
-  fetch(API + "/products/" + cat)
-  .then(r=>r.json())
-  .then(items=>{
-    document.getElementById("list").innerHTML = items.map(p=>`
-      <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
-        ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : 
-         p.image ? `<img src="${p.image}">` :
-         `<div style="padding:20px">
-           <h3>${p.name || p.title || ""}</h3>
-           <p style="color:#ccc;font-size:14px;line-height:1.4">${p.desc || p.text || ""}</p>
-          </div>`}
-        ${p.name ? `<h4>${p.name}</h4>` : ``}
-      </div>
-    `).join("");
-  });
+    fetch(API + "/products/" + cat)
+    .then(r => r.json())
+    .then(items => {
+        console.log("Loaded:", cat, items); // debug
+
+        if (!Array.isArray(items)) {
+            document.getElementById("list").innerHTML = "<p>Erreur chargement</p>";
+            return;
+        }
+
+        document.getElementById("list").innerHTML = items.map(p => `
+            <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
+                
+                ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : ""}
+                ${p.image ? `<img src="${p.image}">` : ""}
+
+                <div style="padding:12px">
+                    <h3>${p.name || p.title}</h3>
+                    ${p.desc ? `<p style="color:#aaa;font-size:14px">${p.desc}</p>` : ""}
+                    ${p.text ? `<p style="color:#aaa;font-size:14px">${p.text}</p>` : ""}
+                </div>
+
+            </div>
+        `).join("");
+    })
+    .catch(e=>{
+        console.error(e);
+        document.getElementById("list").innerHTML = "Erreur réseau";
+    });
 }
 
 function openProduct(p){
