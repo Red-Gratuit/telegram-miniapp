@@ -45,13 +45,24 @@ body{
 }
 
 #enterBtn{
-    background:linear-gradient(135deg, var(--gold), var(--gold2));
-    color:#000;
-    border:none;
-    padding:18px 30px;
-    font-size:18px;
-    border-radius:15px;
-    font-weight:bold;
+  background: linear-gradient(90deg,#d4af37,#ffea70,#d4af37);
+  color:#000;
+  font-weight:bold;
+  padding:18px 40px;
+  border-radius:40px;
+  font-size:20px;
+  box-shadow: 0 0 40px rgba(255,215,0,.7);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+  100%{transform:scale(1)}
+  
+}
+
+#splash{
+  transition: opacity .6s ease;
 }
 
 #muteBtn{
@@ -80,6 +91,18 @@ body{
     gap:12px;
     padding:10px;
 }
+.card{
+  backdrop-filter: blur(8px);
+  background: rgba(20,20,20,.8);
+}
+@keyframes pop{
+  from{opacity:0; transform:scale(.9)}
+  to{opacity:1; transform:scale(1)}
+}
+
+.card{
+  animation: pop .4s ease forwards;
+}
 
 .card{
   background: linear-gradient(145deg,#0a0a0a,#111);
@@ -92,13 +115,25 @@ body{
   border: 1px solid rgba(255,200,60,0.25);
   transition: all 0.25s ease;
 }
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg,transparent,rgba(255,200,80,.3),transparent);
+  opacity:0;
+  transition:.4s;
+}
+
+.card:hover::before,
+.card:active::before{
+  opacity:1;
+}
 
 .card:active{
-  transform: scale(0.97);
-  box-shadow:
-    0 0 30px rgba(255,200,60,0.5),
-    0 0 80px rgba(255,180,30,0.3);
+  transform: scale(.95);
+  box-shadow: 0 0 40px rgba(255,200,60,.6);
 }
+
 
 video, img{
     width:100%;
@@ -225,6 +260,57 @@ button:active{
   color:#ddd;
   font-size:16px;
 }
+#splash img{
+  width:180px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{
+    filter: drop-shadow(0 0 10px gold);
+    transform: scale(1);
+  }
+  to{
+    filter: drop-shadow(0 0 35px #ffcc00);
+    transform: scale(1.05);
+  }
+}
+/* BARRE DES CATEGORIES */
+#categories{
+  display:flex;
+  gap:12px;
+  padding:12px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+#categories::-webkit-scrollbar{ display:none; }
+
+/* CHIP */
+.cat-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  color:white;
+  font-size:15px;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:.25s;
+  backdrop-filter: blur(10px);
+}
+
+.cat-btn:hover{
+  background:rgba(255,255,255,0.18);
+}
+
+.cat-btn.active{
+  background:linear-gradient(135deg,#00ff9d,#00c97b);
+  color:black;
+  font-weight:bold;
+}
 
 </style>
 </head>
@@ -251,6 +337,24 @@ const muteBtn = document.getElementById("muteBtn");
 const splash = document.getElementById("splash");
 const mainApp = document.getElementById("mainApp");
 const sound = document.getElementById("introSound");
+enterBtn.onclick = () => {
+  // Démarrer la musique (obligatoire sur iPhone via interaction)
+  sound.muted = false;
+  sound.play().catch(()=>{});
+
+  // Animation splash → app
+  splash.style.opacity = "0";
+
+  setTimeout(() => {
+    splash.style.display = "none";
+    mainApp.style.display = "block";
+  }, 600);
+};
+
+muteBtn.onclick = () => {
+  sound.muted = !sound.muted;
+  muteBtn.textContent = sound.muted ? "🔇 Son OFF" : "🔊 Son ON";
+};
 
 let muted = false;
 
@@ -280,14 +384,17 @@ fetch(API + "/init", {
 .then(user => {
   document.getElementById("app").innerHTML = `
     <h3>Bienvenue ${user.received.user.first_name}</h3>
-    <div class="menu">
-      <button onclick="load('stup')">🔥 STUP</button>
-      <button onclick="load('puff')">💨 PUFF</button>
-      <button onclick="load('tabac')">🚬 TABAC</button>
-      <button onclick="load('info')">ℹ️ INFO</button>
+
+    <div id="categories">
+      <div class="cat-btn active" onclick="selectCat('stup',this)">🌿 STUP</div>
+      <div class="cat-btn" onclick="selectCat('tabac',this)">🚬 TABAC</div>
+      <div class="cat-btn" onclick="selectCat('puff',this)">💨 PUFF</div>
+      <div class="cat-btn" onclick="selectCat('info',this)">ℹ️ INFO</div>
     </div>
+
     <div id="list"></div>
   `;
+  load("stup");
 });
 
 function load(cat){
