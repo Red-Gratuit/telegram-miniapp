@@ -327,7 +327,50 @@ button:active{
     max-width:70%;
     filter: drop-shadow(0 0 12px rgba(255,215,0,0.4));
 }
+/* === GOLD LUXURY GLOW === */
+.info-card{
+  position:relative;
+  background: rgba(0,0,0,0.75);
+  border-radius:20px;
+  border:1px solid rgba(255,215,0,0.6);
+  box-shadow:
+    0 0 25px rgba(255,215,0,0.25),
+    inset 0 0 15px rgba(255,215,0,0.15);
+  color: #f5e6b3;
+  overflow:hidden;
+}
 
+.info-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    url("assets/marble.jpg") center / cover no-repeat,
+    linear-gradient(120deg, rgba(255,215,0,0.15), rgba(0,0,0,0.9));
+  opacity:0.35;
+  pointer-events:none;
+  border-radius:20px;
+}
+/* Titre gold */
+.info-card h3{
+    color: gold;
+    text-shadow:
+        0 0 12px rgba(255,215,0,0.9),
+        0 0 30px rgba(255,215,0,0.4);
+    font-size: 22px;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+/* Texte */
+.info-card p{
+    white-space: pre-line;
+}
+/* Texte premium */
+.info-card p{
+    color: #f3e6b0;
+    white-space: pre-line;
+}
 </style>
 </head>
 
@@ -438,20 +481,12 @@ function load(cat) {
             return;
         }
 
-        document.getElementById("list").innerHTML = items.map(p => `
-            <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
-                
-                ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : ""}
-                ${p.image ? `<img src="${p.image}">` : ""}
-
-                <div style="padding:12px">
-                    <h3>${p.name || p.title}</h3>
-                    ${p.desc ? `<p>${p.desc}</p>` : ""}
-                    ${p.text ? `<p>${p.text}</p>` : ""}
-                </div>
-
-            </div>
-        `).join("");
+       document.getElementById("list").innerHTML = items.map(i => `
+  <div class="info-card">
+    <h3>${i.title}</h3>
+    <p>${i.text}</p>
+  </div>
+`).join("");
     })
     .catch(()=>{
         document.getElementById("list").innerHTML = "Erreur réseau";
