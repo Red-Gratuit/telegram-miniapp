@@ -382,38 +382,39 @@ fetch(API + "/init", {
 })
 .then(r=>r.json())
 .then(user => {
-  document.getElementById("app").innerHTML = `
-    <h3>Bienvenue ${user.received.user.first_name}</h3>
 
-    <div id="categories">
-      <div class="cat-btn active" onclick="selectCat('stup',this)">🌿 STUP</div>
-      <div class="cat-btn" onclick="selectCat('tabac',this)">🚬 TABAC</div>
-      <div class="cat-btn" onclick="selectCat('puff',this)">💨 PUFF</div>
-      <div class="cat-btn" onclick="selectCat('info',this)">ℹ️ INFO</div>
-    </div>
+ document.getElementById("app").innerHTML = `
+<h3>Bienvenue ${user.received.user.first_name}</h3>
 
-    <div id="list"></div>
+<div id="categories">
+  <div class="cat-btn active" data-cat="stup">🌿 STUP</div>
+  <div class="cat-btn" data-cat="tabac">🚬 TABAC</div>
+  <div class="cat-btn" data-cat="puff">💨 PUFF</div>
+  <div class="cat-btn" data-cat="info">ℹ️ INFO</div>
+</div>
+
+<div id="list"></div>
   `;
-  load("stup");
-  function selectCat(cat, el){
-  // Retirer le bouton actif
-  document.querySelectorAll(".cat-btn").forEach(b=>{
-    b.classList.remove("active");
-  });
 
-  // Activer celui cliqué
-  el.classList.add("active");
+ // ACTIVER LES BOUTONS
+ document.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        load(btn.dataset.cat);
+    });
+ });
 
-  // Charger la catégorie
-  load(cat);
-}
+ // Charger STUP au démarrage
+ load("stup");
 });
 
+
+// === FONCTION LOAD (HORS du .then) ===
 function load(cat) {
     fetch(API + "/products/" + cat)
     .then(r => r.json())
     .then(items => {
-        console.log("Loaded:", cat, items); // debug
 
         if (!Array.isArray(items)) {
             document.getElementById("list").innerHTML = "<p>Erreur chargement</p>";
@@ -428,15 +429,14 @@ function load(cat) {
 
                 <div style="padding:12px">
                     <h3>${p.name || p.title}</h3>
-                    ${p.desc ? `<p style="color:#aaa;font-size:14px">${p.desc}</p>` : ""}
-                    ${p.text ? `<p style="color:#aaa;font-size:14px">${p.text}</p>` : ""}
+                    ${p.desc ? `<p>${p.desc}</p>` : ""}
+                    ${p.text ? `<p>${p.text}</p>` : ""}
                 </div>
 
             </div>
         `).join("");
     })
-    .catch(e=>{
-        console.error(e);
+    .catch(()=>{
         document.getElementById("list").innerHTML = "Erreur réseau";
     });
 }
