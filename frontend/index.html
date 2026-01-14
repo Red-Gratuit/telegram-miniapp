@@ -463,24 +463,32 @@ document.getElementById("app").innerHTML = `
 
 // === FONCTION LOAD (HORS du .then) ===
 function load(cat) {
-    fetch(API + "/products/" + cat)
+  fetch(API + "/products/" + cat)
     .then(r => r.json())
     .then(items => {
 
-        if (!Array.isArray(items)) {
-            document.getElementById("list").innerHTML = "<p>Erreur chargement</p>";
-            return;
-        }
+      document.getElementById("list").innerHTML = items.map(p => `
+        <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
 
-       document.getElementById("list").innerHTML = items.map(i => `
-  <div class="info-card">
-    <h3>${i.title}</h3>
-    <p>${i.text}</p>
-  </div>
-`).join("");
+          ${
+            p.video
+              ? `<video src="${p.video}" autoplay muted loop playsinline></video>`
+              : p.image
+              ? `<img src="${p.image}">`
+              : ""
+          }
+
+          <div class="card-text">
+            <h4>${p.name}</h4>
+            <p>${p.desc}</p>
+          </div>
+
+        </div>
+      `).join("");
     })
-    .catch(()=>{
-        document.getElementById("list").innerHTML = "Erreur réseau";
+    .catch(err => {
+      console.error(err);
+      document.getElementById("list").innerHTML = "Erreur chargement";
     });
 }
 
