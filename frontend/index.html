@@ -83,26 +83,27 @@ body{
     border:none;
     font-size:16px;
 }
+/* Zone principale sous le header */
 /* Zone qui contient les cartes */
-#list {
-  min-height: calc(100vh - 260px); /* espace restant sous header + catégories */
+#list{
+  height: calc(100vh - 260px);   /* prend tout l’espace restant réel */
   padding: 12px;
+  box-sizing: border-box;
 }
 
 /* Mode normal (STUP / TABAC / PUFF) */
-#list.grid {
+#list.grid{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
-/* Mode INFO */
-#list.info {
+/* Mode INFO fullscreen */
+#list.info{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 .card{
   backdrop-filter: blur(8px);
@@ -372,12 +373,12 @@ button:active{
   line-height: 1.6;
   color: #ddd;
 }
-.info-full {
-  min-height: calc(100vh - 220px); /* 220px ≈ header + logo + catégories */
+.info-full{
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;      /* CENTRAGE VERTICAL */
-  justify-content: center;  /* CENTRAGE HORIZONTAL */
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-card::before{
@@ -507,36 +508,40 @@ function load(cat) {
     .then(r => r.json())
     .then(items => {
 
-  // ===== MODE INFO (UNE SEULE CARTE FULLSCREEN) =====
-  if (cat === "info") {
-    const p = items[0]; // l'unique objet info
+      const list = document.getElementById("list");
 
-    document.getElementById("list").innerHTML = `
-      <div class="info-full">
-        <div class="info-card">
-          <h2>ℹ️ ${p.title}</h2>
-          <pre>${p.text}</pre>
+      // ===== MODE INFO =====
+      if (cat === "info") {
+        const p = items[0];
+
+        list.className = "info";   // IMPORTANT
+        list.innerHTML = `
+          <div class="info-full">
+            <div class="info-card">
+              <h2>ℹ️ ${p.title}</h2>
+              <pre>${p.text}</pre>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // ===== MODE NORMAL =====
+      list.className = "grid";
+
+      list.innerHTML = items.map(p => `
+        <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
+          ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : ""}
+          ${p.image ? `<img src="${p.image}">` : ""}
+          <div style="padding:20px">
+            <h3>${p.name || p.title}</h3>
+            <p style="color:#ccc;font-size:14px;line-height:1.4">
+              ${p.desc || p.text || ""}
+            </p>
+          </div>
         </div>
-      </div>
-    `;
-    return;
-  }
-
-  // ===== MODE NORMAL (STUP / PUFF / TABAC) =====
-  document.getElementById("list").innerHTML = items.map(p => `
-    <div class="card" onclick='openProduct(${JSON.stringify(p)})'>
-      ${p.video ? `<video src="${p.video}" playsinline autoplay muted loop></video>` : ""}
-      ${p.image ? `<img src="${p.image}">` : ""}
-      <div style="padding:20px">
-        <h3>${p.name || p.title}</h3>
-        <p style="color:#ccc;font-size:14px;line-height:1.4">
-          ${p.desc || p.text || ""}
-        </p>
-      </div>
-    </div>
-  `).join("");
-})
-
+      `).join("");
+    })
     .catch(err => {
       console.error(err);
       document.getElementById("list").innerHTML = "Erreur chargement";
