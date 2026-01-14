@@ -277,39 +277,44 @@ button:active{
 }
 /* BARRE DES CATEGORIES */
 #categories{
-  display:flex;
-  gap:12px;
-  padding:12px;
-  overflow-x:auto;
-  scrollbar-width:none;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 14px 12px;
+  margin: 0;
+
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 #categories::-webkit-scrollbar{ display:none; }
 
 /* CHIP */
 .cat-btn{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 16px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.12);
-  color:white;
-  font-size:15px;
-  white-space:nowrap;
-  cursor:pointer;
-  transition:.25s;
-  backdrop-filter: blur(10px);
-}
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 14px;
 
+  background: rgba(255,255,255,0.08);
+  color: #aaa;
+
+  transition: 0.25s;
+}
 .cat-btn:hover{
   background:rgba(255,255,255,0.18);
 }
 
 .cat-btn.active{
-  background:linear-gradient(135deg,#00ff9d,#00c97b);
-  color:black;
-  font-weight:bold;
+  background: linear-gradient(135deg, #00ff9d, #00c78a);
+  color: black;
+  box-shadow: 0 0 12px rgba(0,255,157,0.4);
 }
 #logoBar{
     display:flex;
